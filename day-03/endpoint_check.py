@@ -12,14 +12,41 @@ endpoints = [
     },
     {
         "name": "alternate-policy",
-        "url": "http://127.0.0.1:8000/attendance-policy.txt"
+        "url": "http://127.0.0.1:8001/attendance-policy.txt"
     }
 ]
 
 def check_endpoint(url):
-    response = urlopen(url, timeout=3)
-    return {
-        "url": url,
-        "result": response,
-        "status": response.status
-    }
+    try:
+        response = urlopen(url, timeout=3)
+
+        return {
+            "url": url,
+            "reachable": True,
+            "status": response.status,
+            "state": "healthy",
+            "error": None
+        }
+
+    except HTTPError as error: 
+        return {
+            "url": url,
+            "reachable": True,
+            "status": error.code,
+            "state": "http_error",
+            "error": error.reason
+        }
+    except URLError as error:
+        return {
+            "url": url,
+            "reachable": False,
+            "status": None,
+            "state": "url_error",
+            "error": error.reason
+        }
+
+results = []
+for endpoint in endpoints:
+    result = check_endpoint(endpoint["url"])
+    results.append(result)
+    print(result)
