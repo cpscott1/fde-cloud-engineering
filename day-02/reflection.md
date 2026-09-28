@@ -36,3 +36,26 @@ Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/)
 - What I would check: Whether a valid API request can reach the model provider and receive a response; also check for quota or billing errors.
 - Healthy result: The provider returns a response and the application can pass it back to the user.
 - What a failure might mean: The provider could be unavailable, the credentials could be invalid, or the account could have reached a usage limit. I would use the actual error message to narrow it down.
+
+## Python refresher — Reading a policy file
+
+### What I built
+I created `check_policy.py` to read `policy.txt`, print its contents, and count its words.
+
+### Successful run
+- Command: `python3 check_policy.py`
+- File contents printed: [paste or summarize what appeared]
+- Word count: [enter the number your script printed]
+
+### Missing-file test
+I temporarily changed the filename in the script to `missing.txt`. Python initially raised a `FileNotFoundError`. After I added `try` and `except FileNotFoundError`, the script printed:
+
+> Could not find the policy file.
+
+I changed the filename back to `policy.txt` and confirmed the successful run still worked.
+
+### What I learned
+- `.read()` gets the text from the file.
+- `.split()` turns the text into a list of words.
+- `len()` counts the items in that list.
+- `try` and `except FileNotFoundError` let my program give a useful message when the file is missing.
