@@ -1,0 +1,12 @@
+services:
+  assistant:
+    build:
+      context: .
+    image: b2d-knowledge-assistant:day15
+    ports:
+      - "127.0.0.1:8010:8000"
+    environment:
+      B2D_KNOWLEDGE_DIR: /app/knowledge
+      B2D_ENV: ${B2D_ENV:-development}
+    volumes:
+      - "${B2D_KNOWLEDGE_SOURCE:-./district-a/knowledge}:/app/knowledge:ro"

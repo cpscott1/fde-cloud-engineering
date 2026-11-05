@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.git/
+.DS_Store
+
+# Exclude local environment files
+.env
+.env.*
+
+# Allow safe configuration templates
+!.env.example

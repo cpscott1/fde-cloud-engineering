@@ -1,3 +1,10 @@
 .DS_Store
 .venv/
 __pycache__/
+
+# Local environment configuration
+.env
+.env.*
+
+# Allow safe configuration templates
+!.env.example
